@@ -26,6 +26,9 @@ if [ "$(whoami)" != "root" ]; then
   exit 1
 fi
 
+# Hardcoding all the variables to make testing easier
+<< 'MULTILINE-COMMENT'
+
 echo
 echo -n "PIA username (pNNNNNNN): "
 read PIA_USER
@@ -154,5 +157,23 @@ else
   echo "sysctl -w net.ipv6.conf.default.disable_ipv6=0
   "
 fi
+
+# End comment
+MULTILINE-COMMENT
+
+PIA_USER=""
+PIA_PASS=""
+export PIA_USER
+export PIA_PASS
+protocol="tcp"
+encryption="standard"
+PIA_AUTOCONNECT="openvpn_${protocol}_${encryption}"
+export PIA_AUTOCONNECT
+PIA_DNS="false"
+export PIA_DNS
+PIA_PF="true"
+export PIA_PF
+MAX_LATENCY=0.1
+export MAX_LATENCY
 
 ./get_region_and_token.sh
