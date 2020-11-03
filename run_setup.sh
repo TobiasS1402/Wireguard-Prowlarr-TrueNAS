@@ -161,8 +161,13 @@ fi
 # End comment
 MULTILINE-COMMENT
 
-PIA_USER=""
-PIA_PASS=""
+# Fetching credentials from local file
+# Just so they don't show on github
+declare -a creds # an array
+readarray -t creds </usr/local/etc/openvpn/pass.txt
+PIA_USER="${creds[0]}"
+PIA_PASS="${creds[1]}"
+
 export PIA_USER
 export PIA_PASS
 protocol="tcp"
