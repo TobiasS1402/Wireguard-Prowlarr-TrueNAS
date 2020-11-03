@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/local/bin/bash
 # Copyright (C) 2020 Private Internet Access, Inc.
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -37,11 +37,9 @@ check_tool openvpn
 # Check if manual PIA OpenVPN connection is already initialized.
 # Multi-hop is out of the scope of this repo, but you should be able to
 # get multi-hop running with both OpenVPN and WireGuard.
-adapter_check="$( ip a s tun06 2>&1 )"
-should_read="Device \"tun06\" does not exist"
 pid_filepath="/opt/piavpn-manual/pia_pid"
-if [[ "$adapter_check" != *"$should_read"* ]]; then
-  echo The tun06 adapter already exists, that interface is required
+if ifconfig tun1; then
+  echo The tun1 adapter already exists, that interface is required
   echo for this configuration.
   if [ -f "$pid_filepath" ]; then
     old_pid="$( cat "$pid_filepath" )"
@@ -55,7 +53,7 @@ if [[ "$adapter_check" != *"$should_read"* ]]; then
       read close_connection
     fi
     if echo ${close_connection:0:1} | grep -iq n ; then
-      echo Closing script. Resolve tun06 adapter conflict and run the script again.
+      echo Closing script. Resolve tun1 adapter conflict and run the script again.
       exit 1
     fi
     echo Killing the existing OpenVPN process and waiting 5 seconds...
@@ -66,6 +64,8 @@ fi
 
 # PIA currently does not support IPv6. In order to be sure your VPN
 # connection does not leak, it is best to disabled IPv6 altogether.
+<< 'MULTILINE-COMMENT'
+(This doesn't work on FreeBSD)
 if [ $(sysctl -n net.ipv6.conf.all.disable_ipv6) -ne 1 ] ||
   [ $(sysctl -n net.ipv6.conf.default.disable_ipv6) -ne 1 ]
 then
@@ -73,6 +73,7 @@ then
   echo 'sysctl -w net.ipv6.conf.all.disable_ipv6=1'
   echo 'sysctl -w net.ipv6.conf.default.disable_ipv6=1'
 fi
+MULTILINE-COMMENT
 
 #  Check if the mandatory environment variables are set.
 if [[ ! $OVPN_SERVER_IP ||
