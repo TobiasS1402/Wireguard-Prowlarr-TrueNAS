@@ -24,6 +24,9 @@ echo "
     port_forwarding.sh
 #######################################
 "
+echo "'base64' is required to run this script and may not be on
+FreeBSD by default.  Install with 'pkg install base64'
+"
 
 # Check if the mandatory environment variables are set.
 if [[ ! $PF_GATEWAY || ! $PIA_TOKEN || ! $PF_HOSTNAME ]]; then
@@ -97,7 +100,6 @@ expires_at="$(echo "$payload" | base64 -d | jq -r '.expires_at')"
 
 # Display some information on the screen for the user.
 echo "The signature is OK.
-
 --> The port is $port and it will expire on $expires_at. <--
 
 Trying to bind the port..."
@@ -123,7 +125,7 @@ while true; do
       exit 1
     fi
     echo Port $port refreshed on $(date). \
-      This port will expire on $(date --date="$expires_at")
+      This port will expire $expires_at
 
     # sleep 15 minutes
     sleep 900
