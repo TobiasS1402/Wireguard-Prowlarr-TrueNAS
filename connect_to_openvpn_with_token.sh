@@ -201,6 +201,8 @@ gateway_ip="$( cat /opt/piavpn-manual/route_info )"
 if [ "$connected" != true ]; then
   echo "The VPN connection was not established within 10 seconds."
   kill $ovpn_pid
+  echo \n"Openvpn debug info at /opt/piavpn-manual/debug_info:"
+  cat  /opt/piavpn-manual/debug_info
   exit 1
 fi
 
