@@ -19,6 +19,12 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+echo "
+################################
+    get_region_and_token.sh
+################################
+"
+
 # This function allows you to check if the required tools have been installed.
 function check_tool() {
   cmd=$1

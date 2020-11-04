@@ -19,6 +19,12 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+echo "
+#######################################
+    connect_to_openvpn_with_token.sh
+#######################################
+"
+
 # This function allows you to check if the required tools have been installed.
 function check_tool() {
   cmd=$1
@@ -107,6 +113,7 @@ echo "Trying to write /opt/piavpn-manual/pia.ovpn...
 "
 mkdir -p /opt/piavpn-manual
 rm -f /opt/piavpn-manual/credentials /opt/piavpn-manual/route_info
+echo "Removing old credentials and route_info from /opt/piavpn-manual/"
 echo ${PIA_TOKEN:0:62}"
 "${PIA_TOKEN:62} > /opt/piavpn-manual/credentials || exit 1
 
@@ -187,6 +194,7 @@ do
 done
 
 ovpn_pid="$( cat /opt/piavpn-manual/pia_pid )"
+echo "Reading gateway_ip from /opt/piavpn-manual/route_info"
 gateway_ip="$( cat /opt/piavpn-manual/route_info )"
 
 # Report and exit if connection was not initialized within 10 seconds.

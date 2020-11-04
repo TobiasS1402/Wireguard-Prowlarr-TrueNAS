@@ -21,6 +21,12 @@
 # SOFTWARE.
 
 # Only allow script to run as
+echo "
+################################
+    run_setup.sh
+################################
+"
+
 if [ "$(whoami)" != "root" ]; then
   echo "This script needs to be run as root. Try again with 'sudo $0'"
   exit 1
@@ -167,10 +173,10 @@ declare -a creds # an array
 readarray -t creds </usr/local/etc/openvpn/pass.txt
 PIA_USER="${creds[0]}"
 PIA_PASS="${creds[1]}"
-
+echo "Retrieved credentials"
 export PIA_USER
 export PIA_PASS
-protocol="tcp"
+protocol="udp"
 encryption="standard"
 PIA_AUTOCONNECT="openvpn_${protocol}_${encryption}"
 export PIA_AUTOCONNECT

@@ -19,6 +19,11 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+echo "
+#######################################
+    port_forwarding.sh
+#######################################
+"
 
 # Check if the mandatory environment variables are set.
 if [[ ! $PF_GATEWAY || ! $PIA_TOKEN || ! $PF_HOSTNAME ]]; then
@@ -65,7 +70,7 @@ else
   payload_and_signature="$PAYLOAD_AND_SIGNATURE"
   echo "Using the following payload_and_signature from the env var:"
 fi
-echo "$payload_and_signature"
+echo "Payload and signature are: $payload_and_signature"
 export payload_and_signature
 
 # Check if the payload and the signature are OK.
