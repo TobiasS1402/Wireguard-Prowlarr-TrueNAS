@@ -24,9 +24,22 @@ echo "
     port_forwarding.sh
 #######################################
 "
-echo "'base64' is required to run this script and may not be on
-FreeBSD by default.  Install with 'pkg install base64'
-"
+
+# This function allows you to check if the required tools have been installed.
+function check_tool() {
+  cmd=$1
+  package=$2
+  if ! command -v $cmd &>/dev/null
+  then
+    echo "$cmd could not be found"
+    echo "Please run 'pkg install $package'"
+    exit 1
+  fi
+}
+# Now we call the function to make sure we can use curl and jq.
+check_tool base64 base64
+
+
 
 # Check if the mandatory environment variables are set.
 if [[ ! $PF_GATEWAY || ! $PIA_TOKEN || ! $PF_HOSTNAME ]]; then

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/local/bin/bash
 # Copyright (C) 2020 Private Internet Access, Inc.
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -19,6 +19,9 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+# This script has not been completely edited to make it 
+# BSD-compatible because I don't use wireguard.  
+
 # This function allows you to check if the required tools have been installed.
 function check_tool() {
   cmd=$1
@@ -37,6 +40,9 @@ check_tool jq jq
 
 # PIA currently does not support IPv6. In order to be sure your VPN
 # connection does not leak, it is best to disabled IPv6 altogether.
+<<< 'MULTILINE-COMMENT'
+( This doesn't work on FreeBSD. IPv6 is instead disabled in 
+  openvpn_config/standard.ovpn and strong.ovpn )
 if [ $(sysctl -n net.ipv6.conf.all.disable_ipv6) -ne 1 ] ||
   [ $(sysctl -n net.ipv6.conf.default.disable_ipv6) -ne 1 ]
 then
@@ -44,6 +50,7 @@ then
   echo 'sysctl -w net.ipv6.conf.all.disable_ipv6=1'
   echo 'sysctl -w net.ipv6.conf.default.disable_ipv6=1'
 fi
+MULTILINE-COMMENT
 
 # Check if the mandatory environment variables are set.
 if [[ ! $WG_SERVER_IP || ! $WG_HOSTNAME || ! $PIA_TOKEN ]]; then
