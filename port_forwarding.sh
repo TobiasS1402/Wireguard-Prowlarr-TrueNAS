@@ -115,6 +115,9 @@ expires_at="$(echo "$payload" | base64 -d | jq -r '.expires_at')"
 echo "The signature is OK.
 --> The port is $port and it will expire on $expires_at. <--
 
+Sending port# to transmission-remote."
+transmission-remote -p $port
+echo "
 Trying to bind the port..."
 
 # Now we have all required data to create a request to bind the port.
