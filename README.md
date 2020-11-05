@@ -1,8 +1,8 @@
 # Manual PIA VPN Connections
 
-This repository contains documentation on how to create native WireGuard and OpenVPN connections to our __NextGen network__, and also on how to enable Port Forwarding in case you require this feature. You will find a lot of information below. However if you prefer quick test, here is the __TL/DR__:
+### [This is a FreeBSD fork of the original Linux scripts at https://github.com/pia-foss/manual-connections.  The scripts have only been tested with OpenVPN.  WireGuard has not been tested.]
 
-### This is a FreeBSD fork of the original Linux scripts at https://github.com/pia-foss/manual-connections.  The use of WireGuard may work, but the scripts have only been tested with OpenVPN.
+This repository contains documentation on how to create native WireGuard and OpenVPN connections to Private Internet Access' (PIA) __NextGen network__, and also on how to enable Port Forwarding in case you require this feature. You will find a lot of information below. However if you prefer quick test, here is the __TL/DR__:
 
 ```
 git clone https://github.com/glorious1/manual-connections.git
@@ -10,11 +10,10 @@ cd manual-connections
 ./run_setup.sh
 ```
 
-The scripts were written so that they are easy to read and to modify. We hope you will enjoy forking the repo and customizing the scripts for your setup!
-
 ### Dependencies
 
 In order for the scripts to work (probably even if you do a manual setup), you will need the following packages:
+ * `bash`
  * `curl`
  * `jq`
  * (only for WireGuard) `wg-quick` and `wireguard` kernel module
