@@ -2,7 +2,7 @@
 
 This repository contains documentation on how to create native WireGuard and OpenVPN connections to our __NextGen network__, and also on how to enable Port Forwarding in case you require this feature. You will find a lot of information below. However if you prefer quick test, here is the __TL/DR__:
 
-## This is a FreeBSD fork of the original Linux scripts at https://github.com/pia-foss/manual-connections.  The use of WireGuard may work, but they have only been tested with OpenVPN.
+### This is a FreeBSD fork of the original Linux scripts at https://github.com/pia-foss/manual-connections.  The use of WireGuard may work, but the scripts have only been tested with OpenVPN.
 
 ```
 git clone https://github.com/glorious1/manual-connections.git
