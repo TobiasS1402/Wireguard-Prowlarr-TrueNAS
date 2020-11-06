@@ -1,6 +1,14 @@
 # Manual PIA VPN Connections
 
-### [This is a FreeBSD fork of the original Linux scripts at https://github.com/pia-foss/manual-connections.  The scripts have only been tested with OpenVPN.  WireGuard has not been tested.]
+### This is a FreeBSD/FreeNAS fork of the original Linux scripts at https://github.com/pia-foss/manual-connections.  
+Fork Notes:
+1. The scripts have only been tested with OpenVPN, in a FreeNAS jail.  WireGuard has not been tested, but will probably work.
+1. `run_setup.sh` is the script you call to start the whole process.  It calls the following script and so on.  If you're using port forwarding, `port_forwarding.sh` is the last script called and remains running so it can refresh the port every 15 minutes.
+1. I changed `run_setup.sh` from a question-answer format to simply a settings/config file for the process.  Just edit to your desired settings.  PIA username and password are handled as an external file `pass.txt` in the old style: first line user name, second line password.  Set it to any path you want.
+1. In `port_forwarding.sh`, I added a transmission command to send the port number to transmission-rpc.  For this to work, transmission should be running before you start the scripts.  (OpenVPN should NOT be running, as the scripts configure and start it. `service openvpn stop`)
+1. If you have trouble, carefully read the output to see where it failed.  I added a printed header to each script when it starts so you can see where you are (not `openvpn_up.sh` because it is run by OpenVPN).  Should OpenVPN fail to start, I added a command to print `/opt/piavpn-manual/debug_info` to screen so you can see what was going on with OpenVPN.  
+
+End of Fork Notes
 
 This repository contains documentation on how to create native WireGuard and OpenVPN connections to Private Internet Access' (PIA) __NextGen network__, and also on how to enable Port Forwarding in case you require this feature. You will find a lot of information below. However if you prefer quick test, here is the __TL/DR__:
 
