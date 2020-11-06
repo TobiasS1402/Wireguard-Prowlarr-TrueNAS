@@ -112,6 +112,7 @@ expires_at="$(echo "$payload" | base64 -d | jq -r '.expires_at')"
 # Display some information on the screen for the user.
 echo "The signature is OK.
 --> The port is $port and it will expire on $expires_at. <--
+"
 
 # Save variables to files so refresh script can get them
 pf_filepath=/opt/piavpn-manual/pf

@@ -6,6 +6,7 @@ printf "
 ############################# \n\n"
 
 # Retrieve variables
+pf_filepath=/opt/piavpn-manual/pf
 PF_HOSTNAME="$( cat $pf_filepath/PF_HOSTNAME )"
 PF_GATEWAY="$( cat $pf_filepath/PF_GATEWAY )"
 payload="$( cat $pf_filepath/payload )"
@@ -36,7 +37,7 @@ printf "Trying to bind the port . . . \n\n"
     export bind_port_response
     if [ "$(echo "$bind_port_response" | jq -r '.status')" != "OK" ]; then
       echo "The API did not return OK when trying to bind port."
-      echo "Ports expire after two months; maybe that's why.  Exiting.
+      echo "Ports expire after two months; maybe that's why.  Exiting."
       exit 1
     fi
     echo Port $port refreshed on $(date). \
