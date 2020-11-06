@@ -1,5 +1,7 @@
 #!/usr/local/bin/bash
 
+export PATH="/sbin:/bin:/usr/sbin:/usr/bin:/usr/local/sbin:/usr/local/bin:/root/bin"
+
 printf "
 #############################
     refresh_pia_port.sh
@@ -24,7 +26,7 @@ echo expires_at: $expires_at
 printf  "Sending port# to transmission-remote.\n\n"
 transmission-remote -p $port
 
-printf "Trying to bind the port . . . \n\n"
+printf "\nTrying to bind the port . . . \n"
 
 # Now we have all required data to create a request to bind the port.
 # Set a cron job to run this script every 15 minutes, to keep the port
@@ -33,11 +35,11 @@ printf "Trying to bind the port . . . \n\n"
 
   bind_port_response="$(curl -Gs -m 5 \
     --connect-to "$PF_HOSTNAME::$PF_GATEWAY:" \
-    --cacert "ca.rsa.4096.crt" \
+    --cacert "/pia/ca.rsa.4096.crt" \
     --data-urlencode "payload=${payload}" \
     --data-urlencode "signature=${signature}" \
     "https://${PF_HOSTNAME}:19999/bindPort")"
-    echo "$bind_port_response"
+echo "$bind_port_response"
 
     # If port did not bind, just exit the script.
     # This script will exit in 2 months, since the port will expire.
