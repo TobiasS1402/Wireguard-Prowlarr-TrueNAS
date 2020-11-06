@@ -40,7 +40,8 @@ check_tool jq jq
 
 # PIA currently does not support IPv6. In order to be sure your VPN
 # connection does not leak, it is best to disabled IPv6 altogether.
-<<< 'MULTILINE-COMMENT'
+
+<< 'MULTILINE-COMMENT'
 ( This doesn't work on FreeBSD. IPv6 is instead disabled in 
   openvpn_config/standard.ovpn and strong.ovpn )
 if [ $(sysctl -n net.ipv6.conf.all.disable_ipv6) -ne 1 ] ||
@@ -178,4 +179,5 @@ echo
 PIA_TOKEN=$PIA_TOKEN \
   PF_GATEWAY="$(echo "$wireguard_json" | jq -r '.server_vip')" \
   PF_HOSTNAME="$WG_HOSTNAME" \
+
   ./port_forwarding.sh

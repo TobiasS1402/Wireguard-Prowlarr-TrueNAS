@@ -14,6 +14,13 @@ signature="$( cat $pf_filepath/signature )"
 port="$( cat $pf_filepath/port )"
 expires_at="$( cat $pf_filepath/expires_at )"
 
+echo PF_HOSTNAME: $PF_HOSTNAME
+echo PF_GATEWAY: $PF_GATEWAY
+echo payload: $payload
+echo signature: $signature
+echo port: $port
+echo expires_at: $expires_at
+
 printf  "Sending port# to transmission-remote.\n\n"
 transmission-remote -p $port
 

@@ -40,6 +40,10 @@ check_tool curl
 check_tool jq
 check_tool openvpn
 
+<< 'MULTILINE-COMMENT'
+This section won't work in FreeBSD because we are not specifying
+which tun we want.  So it's also probably not necessary - it will
+make an unused tun interface.
 # Check if manual PIA OpenVPN connection is already initialized.
 # Multi-hop is out of the scope of this repo, but you should be able to
 # get multi-hop running with both OpenVPN and WireGuard.
@@ -67,6 +71,7 @@ if ifconfig tun1; then
     sleep 5
   fi
 fi
+MULTILINE-COMMENT
 
 # PIA currently does not support IPv6. In order to be sure your VPN
 # connection does not leak, it is best to disabled IPv6 altogether.
@@ -243,4 +248,5 @@ $ PIA_TOKEN=\"$PIA_TOKEN\" \\
 PIA_TOKEN=$PIA_TOKEN \
   PF_GATEWAY="$gateway_ip" \
   PF_HOSTNAME="$OVPN_HOSTNAME" \
+
   ./port_forwarding.sh
