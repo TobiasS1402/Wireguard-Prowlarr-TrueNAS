@@ -39,6 +39,10 @@ function check_tool() {
 # Now we call the function to make sure we can use curl and jq.
 check_tool base64 base64
 
+echo "PF_HOSTNAME $PF_HOSTNAME"
+echo "PF_GATEWAY $PF_GATEWAY"
+echo "PIA_TOKEN $PIA_TOKEN"
+
 # Check if the mandatory environment variables are set.
 if [[ ! $PF_GATEWAY || ! $PIA_TOKEN || ! $PF_HOSTNAME ]]; then
   echo This script requires 3 env vars:

@@ -248,5 +248,4 @@ $ PIA_TOKEN=\"$PIA_TOKEN\" \\
 PIA_TOKEN=$PIA_TOKEN \
   PF_GATEWAY="$gateway_ip" \
   PF_HOSTNAME="$OVPN_HOSTNAME" \
-
   ./port_forwarding.sh
