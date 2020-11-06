@@ -39,8 +39,6 @@ function check_tool() {
 # Now we call the function to make sure we can use curl and jq.
 check_tool base64 base64
 
-
-
 # Check if the mandatory environment variables are set.
 if [[ ! $PF_GATEWAY || ! $PIA_TOKEN || ! $PF_HOSTNAME ]]; then
   echo This script requires 3 env vars:
@@ -115,34 +113,19 @@ expires_at="$(echo "$payload" | base64 -d | jq -r '.expires_at')"
 echo "The signature is OK.
 --> The port is $port and it will expire on $expires_at. <--
 
-Sending port# to transmission-remote."
-transmission-remote -p $port
-echo "
-Trying to bind the port..."
+# Save variables to files so refresh script can get them
+pf_filepath=/opt/piavpn-manual/pf
+mkdir $pf_filepath
+echo "$PF_HOSTNAME" > $pf_filepath/PF_HOSTNAME
+echo "$PF_GATEWAY" > $pf_filepath/PF_GATEWAY
+echo "$payload" > $pf_filepath/payload
+echo "$signature" > $pf_filepath/signature
+echo "$port" > $pf_filepath/port
+echo "$expires_at" > $pf_filepath/expires_at
 
-# Now we have all required data to create a request to bind the port.
-# We will repeat this request every 15 minutes, in order to keep the port
-# alive. The servers have no mechanism to track your activity, so they
-# will just delete the port forwarding if you don't send keepalives.
-while true; do
-  bind_port_response="$(curl -Gs -m 5 \
-    --connect-to "$PF_HOSTNAME::$PF_GATEWAY:" \
-    --cacert "ca.rsa.4096.crt" \
-    --data-urlencode "payload=${payload}" \
-    --data-urlencode "signature=${signature}" \
-    "https://${PF_HOSTNAME}:19999/bindPort")"
-    echo "$bind_port_response"
+# Final script will bind/refresh the port.  Run it with
+# cron every 15 minutes so PIA doesn't delete port
+# forwarding.  However it will still expire in 2 months.
 
-    # If port did not bind, just exit the script.
-    # This script will exit in 2 months, since the port will expire.
-    export bind_port_response
-    if [ "$(echo "$bind_port_response" | jq -r '.status')" != "OK" ]; then
-      echo "The API did not return OK when trying to bind port. Exiting."
-      exit 1
-    fi
-    echo Port $port refreshed on $(date). \
-      This port will expire $expires_at
+./refresh_pia_port.sh
 
-    # sleep 15 minutes
-    sleep 900
-done
