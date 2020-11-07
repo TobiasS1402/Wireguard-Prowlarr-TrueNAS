@@ -36,7 +36,7 @@ function check_tool() {
     exit 1
   fi
 }
-# Now we call the function to make sure we can use curl and jq.
+# Now we call the function to make sure we can use base64.
 check_tool base64 base64
 
 echo "PF_HOSTNAME $PF_HOSTNAME"
