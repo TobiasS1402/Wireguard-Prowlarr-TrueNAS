@@ -3,7 +3,7 @@
 ### This is a FreeBSD/FreeNAS fork of the original Linux scripts at https://github.com/pia-foss/manual-connections.  
 Fork Notes:
 1. The scripts have only been tested with OpenVPN, in a FreeNAS jail.  WireGuard has not been tested, but will probably work.
-1. `run_setup.sh` is the script you call to start the whole process.  It calls the following script and so on.  If you're using port forwarding, `port_forwarding.sh` is the last script called and remains running so it can refresh the port every 15 minutes.
+1. `run_setup.sh` is the script you call to start the whole process.  It calls the following script and so on.  If you're using port forwarding, `port_forwarding.sh` and `refresh_pia_port.sh` are the last scripts called.  The port needs to be refreshed about every 15 minutes.  I separated out the code in the latter script so it could be called by a cron job.  That way the script doesn't need to be left running in a tmux session or something.  Cron should look like `*/15 * * * * iocage exec transmission /pia/refresh_pia_port.sh` and run as `root`.
 1. I changed `run_setup.sh` from a question-answer format to simply a settings/config file for the process.  Just edit to your desired settings.  PIA username and password are handled as an external file `pass.txt` in the old style: first line user name, second line password.  If you don't want such a file sitting on your server, you can get the question-answer code from the Linux script and change that part.
 1. In `port_forwarding.sh`, I added a transmission command to send the port number to transmission-rpc.  For this to work, transmission should be running before you start the scripts.  (OpenVPN should NOT be running, as the scripts configure and start it. `service openvpn stop`)
 1. If you have trouble, carefully read the output to see where it failed.  I added a printed header to each script when it starts so you can see where you are (not `openvpn_up.sh` because it is run by OpenVPN).  Should OpenVPN fail to start, I added a command to print `/opt/piavpn-manual/debug_info` to screen so you can see what was going on with OpenVPN.  
@@ -14,7 +14,7 @@ This repository contains documentation on how to create native WireGuard and Ope
 
 ```
 git clone https://github.com/glorious1/manual-connections.git
-cd manual-connections
+cd manual-connections # I changed the directory name to pia.
 ./run_setup.sh
 ```
 
