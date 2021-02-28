@@ -38,7 +38,7 @@ fi
 # just so they don't show on github
 # Username on first line, password on second
 declare -a creds # an array
-readarray -t creds </usr/local/etc/openvpn/pass.txt
+readarray -t creds < pia_creds.txt
 PIA_USER="${creds[0]}"
 PIA_PASS="${creds[1]}"
 echo "Retrieved credentials"
