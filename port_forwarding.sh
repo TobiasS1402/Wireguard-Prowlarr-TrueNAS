@@ -119,7 +119,7 @@ echo "The signature is OK.
 "
 
 # Save variables to files so refresh script can get them
-pf_filepath=/opt/piavpn-manual/pf
+pf_filepath=/opt/pia/pf
 mkdir $pf_filepath
 echo "$PF_HOSTNAME" > $pf_filepath/PF_HOSTNAME
 echo "$PF_GATEWAY" > $pf_filepath/PF_GATEWAY
