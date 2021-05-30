@@ -20,11 +20,16 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-# Only allow script to run as
+# Only allow script to run as root
+
+now="$(date)"
+
 echo "
 ################################
     run_setup.sh
 ################################
+
+Starting script at $now
 "
 
 if [ "$(whoami)" != "root" ]; then
