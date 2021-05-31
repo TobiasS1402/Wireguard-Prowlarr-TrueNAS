@@ -160,13 +160,13 @@ if [ "$PIA_PF" != true ]; then
 fi
 
 echo -n "
-This script got started with PIA_PF=true. We will allow WireGuard to fully
-initialize and after that we will try to enable PF by running the following
-command:
-$ PIA_TOKEN=$PIA_TOKEN \\
-  PF_GATEWAY=\"$(echo "$wireguard_json" | jq -r '.server_vip')\" \\
-  PF_HOSTNAME=\"$WG_HOSTNAME\" \\
-  ./port_forwarding.sh
+#This script got started with PIA_PF=true. We will allow WireGuard to fully
+#initialize and after that we will try to enable PF by running the following
+#command:
+#$ PIA_TOKEN=$PIA_TOKEN \\
+#  PF_GATEWAY=\"$(echo "$wireguard_json" | jq -r '.server_vip')\" \\
+#  PF_HOSTNAME=\"$WG_HOSTNAME\" \\
+#  ./port_forwarding.sh
   
 Starting PF in "
 for i in {5..1}; do
@@ -178,6 +178,8 @@ echo
 
 PIA_TOKEN=$PIA_TOKEN \
   PF_GATEWAY="$(echo "$wireguard_json" | jq -r '.server_vip')" \
+export PF_GATEWAY
   PF_HOSTNAME="$WG_HOSTNAME" \
+export PF_HOSTNAME
 
   ./port_forwarding.sh
