@@ -40,12 +40,11 @@ printf "\nTrying to bind the port . . . \n"
 # alive. The servers have no mechanism to track your activity, so they
 # will just delete the port forwarding if you don't send keepalives.
 
-  bind_port_response="$(curl -Gs -m 5 \
-    --connect-to "$PF_HOSTNAME::$PF_GATEWAY:" \
+  bind_port_response="$(curl -sGk -m 5 \
     --cacert "/manual-connections/ca.rsa.4096.crt" \
     --data-urlencode "payload=${payload}" \
     --data-urlencode "signature=${signature}" \
-    "https://${PF_HOSTNAME}:19999/bindPort")"
+    "https://${PF_GATEWAY}:19999/bindPort")"
 echo "$bind_port_response"
 
     # If port did not bind, just exit the script.
