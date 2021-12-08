@@ -33,6 +33,8 @@ In order for the scripts to work (probably even if you do a manual setup), you w
  * (only for WireGuard) `wireguard` kernel module
  * (only for OpenVPN) `openvpn`
  * (only for port forwarding) `base64`
+ * (when using Qbittorrent) `qbittorrent-nox`
+ * 'git'
 
 ### Disclaimers
 
