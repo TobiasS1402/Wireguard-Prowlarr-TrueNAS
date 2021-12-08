@@ -30,7 +30,7 @@ In order for the scripts to work (probably even if you do a manual setup), you w
  * `bash`
  * `curl`
  * `jq`
- * (only for WireGuard) `wireguard` kernel module
+ * (only for WireGuard) `wireguard-go`
  * (only for OpenVPN) `openvpn`
  * (only for port forwarding) `base64`
  * (when using Qbittorrent) `qbittorrent-nox`
