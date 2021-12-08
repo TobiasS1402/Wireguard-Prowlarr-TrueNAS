@@ -16,5 +16,5 @@ sed -i -E 's/gateway_enable=.*//g' /etc/rc.conf
 printf %b\\n "gateway_enable=\"YES\"
 firewall_enable=\"YES\"
 firewall_nat_enable=\"YES\"
-firewall_script=\"/usr/local/etc/IPFW.rules\"
+firewall_script=\"/etc/ipfw.rules\"
 firewall_logging=\"YES\"" | tee -a /etc/rc.conf >/dev/null
