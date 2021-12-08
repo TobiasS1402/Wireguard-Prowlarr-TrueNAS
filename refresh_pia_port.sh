@@ -15,9 +15,10 @@ payload="$( cat $pf_filepath/payload )"
 signature="$( cat $pf_filepath/signature )"
 port="$( cat $pf_filepath/port )"
 expires_at="$( cat $pf_filepath/expires_at )"
+
 #variables for authing to transmission fill area between "" with your auth details to your transmission install
-transUser=""
-transPass=""
+qbitUser=""
+qbitPass=""
 
 echo PF_HOSTNAME: $PF_HOSTNAME
 echo PF_GATEWAY: $PF_GATEWAY
@@ -26,8 +27,10 @@ echo signature: $signature
 echo port: $port
 echo expires_at: $expires_at
 
-printf  "Sending port# to transmission-remote.\n\n"
-transmission-remote --auth "${transUser}":"${transPass}" -p $port
+printf  "Sending port# to Qbittorrent-NOX\n\n"
+
+curl -i --header 'Referer: http://localhost:8080' --data 'username=${qbitUser}&password=${qbitPass}' http://localhost:8080/api/v2/auth/login --cookie-jar ./qbtcookie
+curl --cookie ./qbtcookie -i -X POST -d "json=%7B%22listen_port%22%3A${port}%7D" http://localhost:8080/command/setPreferences
 
 printf "\nTrying to bind the port . . . \n"
 
