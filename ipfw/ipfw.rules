@@ -10,12 +10,12 @@ $cmd 00001 allow all from any to any via lo0
 $cmd 00010 allow all from any to any via $vpn
 
 #allow connect from MGMT
-$cmd 00101 allow log all from 192.168.1.0/29 to me uid qbittorrent
-$cmd 00102 allow log all from me to 192.168.1.0/29 uid qbittorrent
+$cmd 00101 allow log all from 192.168.1.0/24 to me uid qbittorrent
+$cmd 00102 allow log all from me to 192.168.1.0/24 uid qbittorrent
 
 #allow connect from DMZ
-$cmd 00103 allow all from me to 192.168.0.0/28 uid qbittorrent
-$cmd 00104 allow all from 192.168.0.0/28 to me uid qbittorrent
+$cmd 00103 allow all from me to 192.168.0.0/24 uid qbittorrent
+$cmd 00104 allow all from 192.168.0.0/24 to me uid qbittorrent
 
 #allow connect from VPN
 $cmd 00105 allow all from me to 10.9.0.0/24 uid qbittorrent
