@@ -113,7 +113,7 @@ $ curl "http://178.162.208.237:47047"
 
 and you should see the traffic in your tcpdump:
 ```
-bash-5.0# tcpdump -ni any port 47047
+bash-5.0# tcpdump -i pia port 47047
 tcpdump: verbose output suppressed, use -v or -vv for full protocol decode
 listening on any, link-type LINUX_SLL (Linux cooked v1), capture size 262144 bytes
 22:44:01.510804 IP 81.180.227.170.33884 > 10.4.143.34.47047: Flags [S], seq 906854496, win 64860, options [mss 1380,sackOK,TS val 2608022390 ecr 0,nop,wscale 7], length 0
