@@ -21,7 +21,7 @@ cd manual-connections-qbittorrent # I changed the directory name to pia.
 ./run_setup.sh
 ```
 
-###IPFW notes
+### IPFW notes
 For security purposes there is a ipfw script and config in /ipfw/, installing this and filling it with your subnets will ensure that qbittorrent can't download torrents via your ip address.
 
 ### Dependencies
