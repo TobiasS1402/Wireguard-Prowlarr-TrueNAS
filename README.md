@@ -103,7 +103,7 @@ Call __/bindPort__ every 15 minutes, or the port will be deleted!
 To test that it works, you can tcpdump on the port you received:
 
 ```
-bash-5.0# tcpdump -ni any port 47047
+bash-5.0# tcpdump -i pia port 47047
 ```
 
 After that, use curl on the IP of the traffic server and the port specified in the payload which in our case is `47047`:
