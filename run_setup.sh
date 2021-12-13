@@ -60,7 +60,7 @@ export PIA_AUTOCONNECT
 
 PIA_DNS="false"
 export PIA_DNS
-PIA_PF="true"
+PIA_PF="false"
 export PIA_PF
 MAX_LATENCY=0.1
 export MAX_LATENCY
